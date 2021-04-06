@@ -1,4 +1,4 @@
-# Laboratorio 2: Aplicación Servidor
+# Aplicación Servidor
 
 ## Modo de Trabajo
 Para realizar el proyecto trabajamos mayormente en sesiones interactivas utilizando el paquete *teletype* de Atom y comunicandonos por Discord, 
