@@ -85,10 +85,10 @@ class Client(object):
         """
         while not EOL in self.buffer and self.connected:
             if timeout is not None:
-                t1 = time.clock()
+                t1 = time.process_time()
             self._recv(timeout)
             if timeout is not None:
-                t2 = time.clock()
+                t2 = time.process_time()
                 timeout -= t2 - t1
                 t1 = t2
         if EOL in self.buffer:

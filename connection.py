@@ -87,9 +87,9 @@ class Connection(object):
     def eol_incomplete(self, data):
         if(len(data) > 1):
             for i in range(0, len(data) - 1):
-                if data[i] is '\r' and data[i + 1] is not '\n':
+                if data[i] == '\r' and data[i + 1] != '\n':
                     return True
-                elif data[i] is '\n' and data[i - 1] is not '\r':
+                elif data[i] == '\n' and data[i - 1] != '\r':
                     return True
             return False
         return False

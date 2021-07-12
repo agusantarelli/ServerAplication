@@ -17,7 +17,7 @@ import logging
 import sys
 
 DATADIR = 'testdata'
-TIMEOUT = 30  # Una cantidad razonable de segundos para esperar respuestas
+TIMEOUT = 3  # Una cantidad razonable de segundos para esperar respuestas
 
 
 class TestBase(unittest.TestCase):
@@ -72,9 +72,9 @@ class TestHFTPServer(TestBase):
         self.assertEqual(w, [s],
                          "Se envió quit, no hubo respuesta en %0.1f segundos" % TIMEOUT)
         # Medio segundo más par
-        start = time.clock()
+        start = time.process_time()
         got = s.recv(1024)
-        while got and time.clock() - start <= 0.5:
+        while got and time.process_time() - start <= 0.5:
             r, w, e = select.select([s], [], [], 0.5)
             self.assertEqual(r, [s], "Luego de la respuesta de quit, la "
                              "conexión se mantuvo activa por más "
@@ -289,7 +289,6 @@ class TestHFTPHard(TestBase):
         f = open(os.path.join(DATADIR, self.output_file), 'w')
         f.write(test_data)
         f.close()
-        print(len(test_data))
         c = self.new_client()
         c.get_slice(self.output_file, 0, len(test_data))
         self.assertEqual(c.status, constants.CODE_OK)
